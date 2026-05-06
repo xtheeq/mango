@@ -537,6 +537,10 @@ int32_t parse_direction(const char *str) {
 		return LEFT;
 	} else if (strcmp(lowerStr, "right") == 0) {
 		return RIGHT;
+	} else if (strcmp(lowerStr, "consume") == 0) {
+		return CONSUME;
+	} else if (strcmp(lowerStr, "expel") == 0) {
+		return EXPEL;
 	} else {
 		return UNDIR;
 	}
