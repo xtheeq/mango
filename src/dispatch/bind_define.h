@@ -1860,6 +1860,23 @@ int32_t scroller_stack(const Arg *arg) {
 	return scroller_apply_stack(c, target_client, arg->i);
 }
 
+int32_t toggle_deck_mode(const Arg *arg) {
+	if (!selmon || !selmon->sel)
+		return 0;
+
+	Client *c = selmon->sel;
+
+	if (!is_scroller_layout(selmon) || !ISSCROLLTILED(c))
+		return 0;
+
+	Client *head = get_scroll_stack_head(c);
+	if (head) {
+		head->stack_deck_mode = !head->stack_deck_mode;
+		arrange(selmon, false, false);
+	}
+	return 0;
+}
+
 int32_t toggle_all_floating(const Arg *arg) {
 	if (!selmon || !selmon->sel)
 		return 0;

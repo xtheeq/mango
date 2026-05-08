@@ -387,6 +387,7 @@ struct Client {
 	float scroller_proportion;
 	float stack_proportion;
 	float old_stack_proportion;
+	bool stack_deck_mode;
 	bool need_output_flush;
 	struct dwl_animation animation;
 	struct dwl_opacity_animation opacity_animation;
@@ -4227,6 +4228,7 @@ void init_client_properties(Client *c) {
 	c->is_restoring_from_ov = 0;
 	c->isurgent = 0;
 	c->need_output_flush = 0;
+	c->stack_deck_mode = false;
 	c->scroller_proportion = config.scroller_default_proportion;
 	c->is_pending_open_animation = true;
 	c->drag_to_tile = false;

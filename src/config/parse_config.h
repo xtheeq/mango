@@ -1086,6 +1086,8 @@ FuncType parse_func_name(char *func_name, Arg *arg, char *arg_value,
 	} else if (strcmp(func_name, "incgaps") == 0) {
 		func = incgaps;
 		(*arg).i = atoi(arg_value);
+	} else if (strcmp(func_name, "toggle_deck_mode") == 0) {
+		func = toggle_deck_mode;
 	} else if (strcmp(func_name, "togglegaps") == 0) {
 		func = togglegaps;
 	} else if (strcmp(func_name, "chvt") == 0) {

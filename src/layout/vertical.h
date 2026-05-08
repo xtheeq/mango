@@ -223,6 +223,15 @@ void arrange_stack_vertical(Client *scroller_stack_head,
 	if (stack_size == 0)
 		return;
 
+	if (scroller_stack_head->stack_deck_mode) {
+		iter = scroller_stack_head;
+		while (iter) {
+			resize(iter, geometry, 0);
+			iter = iter->next_in_stack;
+		}
+		return;
+	}
+
 	float total_proportion = 0.0f;
 	iter = scroller_stack_head;
 	while (iter) {
