@@ -129,7 +129,7 @@ The mango package to use
 
 Mango configuration written in Nix. Entries with the same key
 should be written as lists. Variables and colors names should be
-quoted. See <https://mangowc.vercel.app/docs> for more examples.
+quoted.
 
 > **Note:**
 >
