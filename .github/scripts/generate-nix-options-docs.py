@@ -31,7 +31,7 @@ def clean_description(desc: str) -> str:
 
 def format_default_value(default_data) -> str:
     """Safely formats the default value, handling HTML escaping for tables."""
-    if not default_data:
+    if default_data is None:
         return "*None*"
 
     val_text = default_data.get("text", "") if isinstance(default_data, dict) and default_data.get("_type") == "literalExpression" else str(default_data)
@@ -55,7 +55,7 @@ def main():
     with open(output_md, 'a', encoding='utf-8') as out:
         out.write(f"## {title}\n\n")
 
-        for key, opt in data.items():
+        for key, opt in sorted(data.items()):
             if key.startswith("_module"):
                 continue
 
