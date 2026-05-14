@@ -81,8 +81,8 @@ static void dwindle_insert(DwindleNode **root, Client *new_c, Client *focused,
 		target = dwindle_first_leaf(*root);
 
 	// ================= 保持其他窗口比例缩减逻辑 =================
-	DwindleNode *path[128];
-	float p[128];
+	DwindleNode *path[512];
+	float p[512];
 	int path_len = get_block_path_and_ratios(target, split_h, path, p);
 
 	int n_old = 1;
@@ -161,7 +161,7 @@ static void dwindle_remove(DwindleNode **root, Client *c) {
 
 	// 查找连续的同方向块路径
 	bool split_h = parent->split_h;
-	DwindleNode *path[128];
+	DwindleNode *path[512];
 	int path_len = 0;
 	path[path_len++] = parent;
 	DwindleNode *curr = parent->parent;
@@ -171,7 +171,7 @@ static void dwindle_remove(DwindleNode **root, Client *c) {
 	}
 
 	// 计算各祖先的旧绝对占比
-	float p[128];
+	float p[512];
 	p[path_len - 1] = 1.0f;
 	for (int i = path_len - 1; i > 0; i--) {
 		DwindleNode *S = path[i];
@@ -457,6 +457,8 @@ static void dwindle_insert_with_config(DwindleNode **root, Client *new_c,
 		lock = true;
 	} else {
 		bool likely_h = (fg->width >= fg->height);
+		split_h = likely_h;
+
 		if (likely_h) {
 			if (config.dwindle_hsplit == 0)
 				as_first = (cursor->x < fcx);
@@ -482,8 +484,8 @@ static void dwindle_insert_with_config(DwindleNode **root, Client *new_c,
 		as_first = false;
 
 		// ================= 计算新节点的 1/N 比例 =================
-		DwindleNode *path[128];
-		float p[128];
+		DwindleNode *path[512];
+		float p[512];
 		int path_len = get_block_path_and_ratios(target, split_h, path, p);
 
 		int n_old = 1;
@@ -584,4 +586,9 @@ void dwindle(Monitor *m) {
 	dwindle_assign(*root, m->w.x + gap_oh, m->w.y + gap_ov,
 				   m->w.width - 2 * gap_oh, m->w.height - 2 * gap_ov, gap_ih,
 				   gap_iv);
+}
+
+void cleanup_monitor_dwindle(Monitor *m) {
+	for (uint32_t t = 0; t < LENGTH(tags) + 1; t++)
+		dwindle_free_tree(m->pertag->dwindle_root[t]);
 }

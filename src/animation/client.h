@@ -248,7 +248,7 @@ void apply_shield(Client *c, struct wlr_box clip_box) {
 
 void apply_split_border(Client *c, bool hit_no_border) {
 
-	if (c->iskilling || !client_surface(c)->mapped)
+	if (c->iskilling || !c->mon || !client_surface(c)->mapped)
 		return;
 
 	const Layout *layout = c->mon->pertag->ltidxs[c->mon->pertag->curtag];
