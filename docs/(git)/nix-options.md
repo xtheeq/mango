@@ -13,7 +13,7 @@ description: NixOS and Home Manager configuration options for mangowm.
 
 
 
-Whether to enable mango, a wayland compositor based on dwl\.
+Whether to enable mango, a wayland compositor based on dwl…
 
 
 
