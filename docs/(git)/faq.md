@@ -1,6 +1,6 @@
 ---
 title: FAQ
-description: Frequently asked questions and troubleshooting.
+description: Frequently asked questions and troubleshooting
 ---
 
 ### How do I arrange tiled windows with my mouse?

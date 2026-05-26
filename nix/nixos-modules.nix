@@ -8,7 +8,7 @@ self: {
 in {
   options = {
     programs.mango = {
-      enable = lib.mkEnableOption "mango, a wayland compositor based on dwl";
+      enable = lib.mkEnableOption "mango, a wayland compositor based on dwl.";
       addLoginEntry = lib.mkOption {
         type = lib.types.bool;
         default = true;
